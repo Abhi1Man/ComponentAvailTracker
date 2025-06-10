@@ -98,7 +98,7 @@ def extraction(input_str: str) -> str:
     except ValueError:
         return "Error: Input must be in the format 'Manufacturer||PartNumber||2'."
     query={"promptSES":"","promptURL":""}
-    ans1= tavily_search(f"Check if part number {part_number} from {manufacturer} is currently available or discontinued. If discontinued, provide the end-of-life (EOL) date and the replacement or superseding part number, if any. Ensure the information is sourced from a genuine and authoritative source such as the manufacturer’s website or a trusted distributor.")
+    ans1= tavily_search(f"Check if part number {part_number} from {manufacturer} is currently available or discontinued. If discontinued, provide the end-of-life (EOL) date and superseded by which Part Number component?, if any. Ensure the information is sourced from a genuine and authoritative source such as the manufacturer’s website or a trusted distributor.")
     # ans1= tavily_search(f"Is the part number {part_number} of {manufacturer} is available or discontinued? If discontinued, what is the date for its end of life (follow format DD-MM-YYYY) and superseded by which Part Number component? Also provide the URL or name of website from where the response can be verified.")
     print("Tavily Response for Status EOL and supersed by")
     print(ans1)
