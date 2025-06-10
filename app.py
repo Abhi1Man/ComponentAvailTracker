@@ -44,7 +44,7 @@ def cached_google_search(manufacturer: str, part_number: str) -> str:
     return google_search(tool_input)
 
 def highlight_alternate_rows(row):
-    return ['background-color: #98FB98' if row.name % 2 else 'background-color: #32CD32'] * len(row)
+    return ['background-color: #ccff99' if row.name % 2 else 'background-color: #ffe6ff'] * len(row)
 
 # tavily search function
 def tavily_search(query: str) -> dict:
@@ -69,7 +69,7 @@ def google_search(query: str) -> str:
             print(part_number)
     res = requests.get(
         "https://google.serper.dev/search",
-        params={"q": f"Provide the official datasheet URL for part number {part_number} manufactured by {manufacturer}.The URL should contain {part_number}"},
+        params={"q": f"Find the official datasheet URL for part number {part_number} from {manufacturer}. The URL should point to a genuine and authoritative source such as the manufacturer's website or a trusted distributor"},
         headers={"X-API-KEY": os.getenv('SERPAPI_KEY')}
     )
     print("+++++++++++++++++++++++++")
@@ -98,7 +98,8 @@ def extraction(input_str: str) -> str:
     except ValueError:
         return "Error: Input must be in the format 'Manufacturer||PartNumber||2'."
     query={"promptSES":"","promptURL":""}
-    ans1= tavily_search(f"Is the part number {part_number} of {manufacturer} is available or discontinued? If discontinued, what is the date for its end of life (follow format DD-MM-YYYY) and superseded by which Part Number component? Also provide the URL or name of website from where the response can be verified.")
+    ans1= tavily_search(f"Check if part number {part_number} from {manufacturer} is currently available or discontinued. If discontinued, provide the end-of-life (EOL) date and the replacement or superseding part number, if any. Ensure the information is sourced from a genuine and authoritative source such as the manufacturer’s website or a trusted distributor.")
+    # ans1= tavily_search(f"Is the part number {part_number} of {manufacturer} is available or discontinued? If discontinued, what is the date for its end of life (follow format DD-MM-YYYY) and superseded by which Part Number component? Also provide the URL or name of website from where the response can be verified.")
     print("Tavily Response for Status EOL and supersed by")
     print(ans1)
     query=ans1
