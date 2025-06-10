@@ -1,0 +1,6 @@
+streamlit
+pandas
+tavily-python==0.7.3
+langchain-openai==0.3.18
+requests
+dotenv
